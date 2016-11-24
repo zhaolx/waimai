@@ -1,0 +1,27 @@
+<include file="Public:header" />
+<style>
+.am-list li a{font-size:16px;}
+.am-list li div{font-size:16px;}
+.am-list li div div{height:30px;}
+.am-list li span{height:22px;}
+#cart .pd_product-num-wrap{height:28px; width:auto;}
+#cart .pd_product-num-minus{height:28px;}
+#cart .pd_product-num-plus{height:28px;}
+#cart .Number{height:28px; width:20px; text-align:center;}
+#Hide{display:none;}
+#cart .pd_product-num-minus:before, #cart .pd_product-num-plus:before{
+left: 5px;top: 13px;}
+#cart .pd_product-num-plus:after {top: 9px;}
+</style>
+<div class="am-g am-lg-fixed"  style="padding:0; font-size:14px;" >
+        <div class="am-panel-bd"  style="padding:0">
+          <ul class="am-list blog-list" id="cart" style="font-size:14p;">
+			 
+          </ul>
+          <div style="position: fixed;bottom: 49px;width: 100%;background-color:#5eb95e;"><a class="am-btn am-btn-success am-btn-sm" href="javascript:void(0);" id="totalAmount" style="width:50%"></a><a class="am-btn am-btn-success am-btn-sm" href="javascript:void(0);" data-am-modal="{target: '#doc-modal-account'}"  style="width:25%">去结算</a><a class="am-btn am-btn-warning am-btn-sm" href="javascript:void(0);" id="delcart" style="width:25%">清空</a></div>
+        </div>
+
+   
+</div>
+<include file="Public:footer" />
+

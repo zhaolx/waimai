@@ -1,0 +1,97 @@
+<include file="Public:header" />
+<div class="am-g am-lg-fixed">
+  <div class="am-u-lg-2 blog-sidebar am-show-lg-only">
+    <div class="am-panel-group" data-am-sticky="{top:10}" style="box-shadow: rgb(66, 152, 66) 0px 0px 5px;">
+	  <section class="am-panel am-panel-default">
+        <div class="am-panel-hd">商品分类</div>
+        <ul class="am-list blog-list">
+          <li><a href="index.php">全部</a></li>
+		  <volist name="cate" id="c">
+		  <li><a href="<{:U('Index/index',array('cid'=>$c['cid']))}>"><{$c.name}></a></li>
+		  
+		  </volist>
+        </ul>
+      </section>
+    </div>
+  </div>
+  <div class="am-u-lg-8" style="padding:0">
+    <article class="blog-main">
+	<!--商品图片-->
+	<div class="am-u-lg-8" style="padding:0">
+		<!--<div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}'>
+		  <ul class="am-slides">
+			<li>
+			  <img src="./Public/Uploads/Good/{$good.img}" id="img_{$good.gid}" />
+			</li>
+		  </ul>
+		</div>-->
+		<div class="good_img"><img src="./Public/Uploads/Good/<{$good.img}>" id="img_<{$good.gid}>" width="100%" style="box-shadow: 0px 0px 8px #429842;"/></div>
+        <div class="pd_box-border am-hide-lg-only"  data-am-sticky>
+			<div class="pd_product-title-wrap">
+				<div class="pd_product-title-box">
+					<h2 class="pd_product-title" id="pd_product-title" title="<{$good.name}>"><{$good.name}></h2>
+					<div class="pd_product-price" id="current_price">
+						<span class="pd_product-price-yen">¥</span>
+						<strong class="pd_product-price-num"><{$good.price}></strong>
+						<del class="pd_product-price-old"></del>
+					</div>
+				</div>               
+			</div>
+			 <!-- 系列属性-->
+			<div class="pd_product-buy-num">
+				<div class="pd_product-num-wrap">
+					<span class="pd_product-num-minus"></span>
+					<span class="buycount" style="width: 20px;text-align: center;">1</span>
+					<span class="pd_product-num-plus"></span>
+				</div>
+				<a href="javascript:void(0);" class="pd_add-cart" onclick="putCart();" style="color: white;" >加入购物车</a>
+			</div>          
+		</div>
+		<div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+		  <h2 class="am-titlebar-title">图文详情</h2>
+		</div>
+		<{$good.infor}>
+	</div>
+	<!--标题购买-->
+	<div class="am-u-lg-4" style="padding-left: 5px;">
+		<div class="pd_box-border am-show-lg-only"  data-am-sticky="{top:10}">
+			<div class="pd_product-title-wrap">
+				<div class="pd_product-title-box">
+					<h2 class="pd_product-title" id="pd_product-title" title="<{$good.name}>"><{$good.name}></h2>
+					<div class="pd_product-price" id="current_price">
+						<span class="pd_product-price-yen">¥</span>
+						<strong class="pd_product-price-num"><{$good.price}></strong>
+						<del class="pd_product-price-old"></del>
+					</div>
+				</div>               
+			</div>
+			 <!-- 系列属性-->
+			<div class="pd_product-buy-num">
+				<div class="pd_product-num-wrap">
+					<span class="pd_product-num-minus"></span>
+					<span class="buycount" style="width: 20px;text-align: center;">1</span>
+					<span class="pd_product-num-plus"></span>
+				</div>
+				<a href="javascript:void(0);" class="pd_add-cart" onclick="putCart();" style="color: white;" >加入购物车</a>
+			</div>          
+		</div>
+	</div>
+   </article>
+   </div>
+   <!--购物车-->
+   <div class="am-u-lg-2 blog-sidebar am-show-lg-only">
+    <div class="am-panel-group" data-am-sticky="{top:10}"  style="box-shadow: rgb(66, 152, 66) 0px 0px 5px;">
+      <section class="am-panel am-panel-default">
+        <div class="am-panel-hd"><span class="am-icon-shopping-cart"></span>&nbsp;&nbsp;购物车<span class="am-badge am-badge-warning am-round Allcount" style="position: absolute;">0</span></div>
+        <div class="am-panel-bd">
+          <ul class="am-list blog-list" id="cart" style="max-height:346px; overflow:auto;margin-bottom:0px;">
+			 
+          </ul>
+          <a class="am-btn am-btn-success am-btn-sm" href="javascript:void(0);" data-am-modal="{target: '#doc-modal-account'}" style="width:50%;">去结算</a><a class="am-btn am-btn-warning am-btn-sm" href="javascript:void(0);" id="delcart" style="width:50%;">全清空</a>
+        </div>
+		<div data-am-widget="gotop" class="am-panel-hd"><a href="#top" title="回到顶部" style=" color:#FFFFFF; display:block"><span class="am-gotop-icon am-icon-chevron-up"></span>&nbsp;&nbsp;回顶部</a></div>
+      </section>
+    </div>
+  </div>
+</div>
+<include file="Public:footer" />

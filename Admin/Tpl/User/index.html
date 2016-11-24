@@ -1,0 +1,62 @@
+<include file="Public:header" />
+<!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">会员列表</strong></div>
+    </div>
+	<div class="am-g">
+      <div class="am-u-md-6 am-cf">
+        <div class="am-fl am-cf">
+          <div class="am-btn-toolbar am-fl">
+            <div class="am-btn-group am-btn-group-xs">
+              <a type="button" class="am-btn am-btn-default" href="<{:U('User/index',array('type'=>'regtime'))}>"><span class="am-icon-calendar"></span> 默认注册排序</a>
+              <a type="button" class="am-btn am-btn-default" href="<{:U('User/index',array('type'=>'order_count'))}>"><span class="am-icon-recycle"></span> 购买次数排序</a>
+              <a type="button" class="am-btn am-btn-default" href="<{:U('User/index',array('type'=>'totalAmount'))}>"><span class="am-icon-cny"></span> 消费金额排序</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="am-u-md-3 am-cf">
+        <div class="am-fr">
+          <div class="am-input-group am-input-group-sm">
+            <input type="text" class="am-form-field" >
+                <span class="am-input-group-btn">
+                  <button class="am-btn am-btn-default" type="button">搜索</button>
+                </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="am-g">
+      <div class="am-u-sm-12">
+          <table class="am-table am-table-striped am-table-hover table-main">
+				<thead>
+				  <tr>
+					<th class="table-title">会员ID</th><th class="table-title">姓名</th><th class="table-title">电话</th><th class="table-title">地址</th><th class="table-title">购买次数</th><th class="table-title">消费总额</th><th class="table-title">注册日期</th>
+				  </tr>
+			  </thead>
+			  <tbody>
+				<volist name="list" id="u" empty="暂无会员">
+				<tr>
+				  <td><{$u.uid}></td>
+				  <td><{$u.name}></td>
+				  <td><{$u.tel}></td>
+				  <td><{$u.address}></td>
+				  <td><{$u.order_count}></td>
+				  <td><{$u.totalAmount}></td>
+				  <td><{$u.regtime|date="y-m-d",###}></td>
+				</tr>
+				</volist>
+			  </tbody>
+			</table>
+         <ul class="am-pagination blog-pagination" style="text-align: right;">
+      <{$page}>
+    </ul>
+          <hr />
+          <p>注：</p>
+      </div>
+    </div>
+  </div>
+  <!-- content end -->
+</div>
+<include file="Public:footer" />

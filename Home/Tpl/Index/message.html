@@ -1,0 +1,16 @@
+<include file="Public:header" />
+<div class="am-g am-lg-fixed">
+  <div class="am-u-lg-8 am-u-lg-centered">
+    <article class="blog-main">
+	  <h3 class="am-article-title blog-title">
+        <a href="#"><{$m.title}></a>
+      </h3>
+      <h4 class="am-article-meta blog-meta">时间：<{$m.time|date="y-m-d",###}></h4>
+
+      <div class="am-g blog-content">
+	  <{$m.content}>
+	  </div>
+   </article>
+   </div>
+</div>
+<include file="Public:footer" />

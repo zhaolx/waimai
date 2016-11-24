@@ -1,0 +1,63 @@
+<include file="Public:header" />
+<div class="am-g am-lg-fixed">
+  <div class="am-u-lg-2 blog-sidebar am-show-lg-only">
+    <div class="am-panel-group" data-am-sticky="{top:10}"  style="box-shadow: rgb(66, 152, 66) 0px 0px 5px;">
+	  <section class="am-panel am-panel-default">
+        <div class="am-panel-hd">商品分类</div>
+        <ul class="am-list blog-list">
+          <li><a href="index.php">全部</a></li>
+		  <volist name="cate" id="c">
+		  <li><a href="index.php?m=Index&a=index&cid={$c.cid}">{$c.name}</a></li>
+		  </volist>
+        </ul>
+      </section>
+    </div>
+  </div>
+  <div class="am-u-lg-8" style="padding: 0;">
+   <div data-am-widget="slider" class="am-slider am-slider-default" data-am-slider='{}' style="height:200px">
+	  <ul class="am-slides" style="height:200px; overflow:hidden">
+	  <volist name="slide" id="s" >
+		<li>
+		  <a href="{$s.url}"><img src="./Public/Uploads/Slide/{$s.imgurl}"></a>
+		</li>
+		</volist>
+	  </ul>
+	</div>
+    <article class="blog-main">
+       <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-3 am-avg-lg-3 am-gallery-bordered"> 
+		  <volist name="goodlist" id="g" empty="暂无上架商品">
+		  <li>
+			<div class="am-gallery-item">
+			  <a href="index.php?m=Index&a=good&gid={$g.gid}">
+				<img src="./Public/Uploads/Good/{$g.img}" alt="{$g.name}" id="img_{$g.gid}" />
+				<h3 class="am-gallery-title">{$g.name}</h3></a>
+				<div class="am-gallery-desc">¥{$g.price}
+				   <a href="javascript:void(0);" class="pd_add-cart" onclick="addCart('{$g.gid}','{$g.name}','{$g.price}');"  style="color: white; width:100%">加入购物车</a>
+				</div>
+			</div>
+		  </li>
+		  </volist>
+		</ul>
+    </article>
+    <hr class="am-article-divider blog-hr">
+    <ul class="am-pagination blog-pagination">
+      {$page}
+    </ul>
+  </div>
+  <div class="am-u-lg-2 blog-sidebar am-show-lg-only">
+    <div class="am-panel-group" data-am-sticky="{top:10}"  style="box-shadow: rgb(66, 152, 66) 0px 0px 5px;">
+      <section class="am-panel am-panel-default">
+        <div class="am-panel-hd"><span class="am-icon-shopping-cart"></span>购物车</div>
+        <div class="am-panel-bd">
+          <ul class="am-list blog-list" id="cart">
+			 
+          </ul>
+          <a class="am-btn am-btn-success am-btn-sm" href="javascript:void(0);" data-am-modal="{target: '#doc-modal-account'}">去结算</a><a class="am-btn am-btn-warning am-btn-sm" href="javascript:void(0);" id="delcart">清空</a>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+
+<include file="Public:footer" />

@@ -1,0 +1,16 @@
+<include file="Public:header" />
+<div class="am-g am-lg-fixed">
+  <div class="am-u-lg-8 am-u-lg-centered" style="padding:0">
+    <article class="blog-main">
+		<ul class="am-list am-list-static">
+		  <volist name="list" id="m">
+		     <li><a href="<{:U('Index/message',array('id'=>$m['id']))}>" style="width:100%;"><{$m.title}><span style="float:right;color:#999999; font-weight:normal;margin-right:10px;"><{$m.time|date="y-m-d",###}></span></a></li>
+		  </volist >
+		</ul>
+		<ul class="am-pagination blog-pagination" style="text-align: right;">
+		  <{$page}>
+		</ul>
+   </article>
+   </div>
+</div>
+<include file="Public:footer" />

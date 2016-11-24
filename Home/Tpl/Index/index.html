@@ -1,0 +1,63 @@
+<include file="Public:header" />
+<div class="am-g am-lg-fixed">
+  <div class="am-u-lg-2 blog-sidebar am-show-lg-only">
+    <div class="am-panel-group" data-am-sticky="{top:10}"  style="box-shadow: rgb(66, 152, 66) 0px 0px 5px;">
+	  <section class="am-panel am-panel-default">
+        <div class="am-panel-hd">商品分类</div>
+        <ul class="am-list blog-list">
+          <li><a href="index.php">全部</a></li>
+		  <volist name="cate" id="c">
+		  <li><a href="<{:U('Index/index',array('cid'=>$c['cid']))}>"><{$c.name}></a></li>
+		  </volist>
+        </ul>
+      </section>
+    </div>
+  </div>
+  <div class="am-u-lg-8" style="padding: 0;">
+   <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='' style="height:200px">
+	  <ul class="am-slides huandeng" style="height:200px; overflow:hidden">
+	  <volist name="slide" id="s" >
+		<li>
+		  <a href="<{$s.url}>"><img src="./Public/Uploads/Slide/<{$s.imgurl}>"></a>
+		</li>
+		</volist>
+	  </ul>
+	</div>
+    <article class="blog-main">
+       <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-3 am-avg-lg-3 am-gallery-bordered"> 
+		  <volist name="goodlist" id="g" empty="暂无上架商品">
+		  <li>
+			<div class="am-gallery-item good_infor">
+			  <a href="<{:U('Index/good',array('gid'=>$c['gid']))}>">
+				<div class="good_img"><img src="./Public/Uploads/Good/<{$g.img}>" alt="<{$g.name}>" id="img_<{$g.gid}>"/></div>
+				<h3 class="am-gallery-title"><{$g.name}></h3></a>
+				<div class="am-gallery-desc">¥<{$g.price}>
+				   <a href="javascript:void(0);" class="pd_add-cart" onclick="addCart('<{$g.gid}>','<{$g.name}>','<{$g.price}>');"  style="color: white; width:100%">加入购物车</a>
+				</div>
+			</div>
+		  </li>
+		  </volist>
+		</ul>
+    </article>
+    <hr class="am-article-divider blog-hr">
+    <ul class="am-pagination blog-pagination" style="text-align: right;">
+      <{$page}>
+    </ul>
+  </div>
+  <div class="am-u-lg-2 blog-sidebar am-show-lg-only">
+    <div class="am-panel-group" data-am-sticky="{top:10}"  style="box-shadow: rgb(66, 152, 66) 0px 0px 5px;">
+      <section class="am-panel am-panel-default">
+        <div class="am-panel-hd"><span class="am-icon-shopping-cart"></span>&nbsp;&nbsp;购物车<span class="am-badge am-badge-warning am-round Allcount" style="position: absolute;">0</span></div>
+        <div class="am-panel-bd">
+          <ul class="am-list blog-list" id="cart" style="max-height:346px; overflow:auto;margin-bottom:0px;">
+			 
+          </ul>
+          <a class="am-btn am-btn-success am-btn-sm" href="javascript:void(0);" data-am-modal="{target: '#doc-modal-account'}" style="width:50%;">去结算</a><a class="am-btn am-btn-warning am-btn-sm" href="javascript:void(0);" id="delcart" style="width:50%;">全清空</a>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+
+<include file="Public:footer" />

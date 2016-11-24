@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title><{$site_name}></title>
+  <meta name="keywords" content="<{$site_keywords}>" />
+  <meta name="description" content="<{$site_description}>" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <link rel="alternate icon" type="image/png" href="__TMPL__assets/i/favicon.png">
+  <link rel="stylesheet" href="__TMPL__assets/css/amazeui.min.css"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  
+	<!--[if lt IE 9]>
+	<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+	<script src="__TMPL__assets/js/polyfill/rem.min.js"></script>
+	<script src="__TMPL__assets/js/polyfill/respond.min.js"></script>
+	<script src="__TMPL__assets/js/amazeui.legacy.js"></script>
+	<![endif]-->
+	
+	<!--[if (gte IE 9)|!(IE)]><!-->
+	<script src="__TMPL__assets/js/jquery.min.js"></script>
+	<script src="__TMPL__assets/js/amazeui.min.js"></script>
+	<!--<![endif]-->
+	<script src="__TMPL__assets/js/cart.js"></script>
+	<link rel="stylesheet" href="__TMPL__assets/css/app.css"/>
+</head>
+<body style="padding-bottom:0px;">
+<header data-am-widget="menu" class="am-header am-header-default am-hide-lg-only">
+  <div class="am-header-left am-header-nav">
+    <a href="tel:<{$site_tel}>" class="" >
+      <img src="__TMPL__assets/i/icon/078.png"/>
+    </a>
+  </div>
+  <h1 class="am-header-title">
+    <a href="#title-link"><{$catename}>-<{$site_name}></a>
+  </h1>
+  <in name="Think.ACTION_NAME"  value="edit">
+  <div class="am-header-right am-header-nav">
+    <a href="index.php?m=User&a=logout" class="" >
+      退出
+    </a>
+  </div>
+  </in>
+</header>
+<!--右侧边栏-->
+<notin name="Think.ACTION_NAME"  value="cart,mlist,edit,message,map">
+<nav data-am-widget="menu" class="am-menu  am-menu-offcanvas2" data-am-menu-offcanvas>
+  <a href="javascript: void(0)" class="am-menu-toggle">
+    <span class="am-menu-toggle-title">分类</span>
+  </a>
+  <div class="am-offcanvas">
+    <div class="am-offcanvas-bar am-offcanvas-bar-flip">
+      <ul class="am-menu-nav am-avg-sm-3">
+	      <li><a href="index.php">全部</a></li>
+		  <volist name="cate" id="c">
+		  <li><a href="<{:U('Index/index',array('cid'=>$c['cid']))}>"><{$c.name}></a></li>
+		  </volist>
+      </ul>
+    </div>
+  </div>
+</nav>
+</notin >
+<div class="am-g am-show-lg-only">
+  <div class="am-u-lg-12 am-u-lg-centered">
+    <div class="top-wrap" id="header">
+        <div class="logo"><img src="__TMPL__image/logo.png" ></div>
+		<div class="extra">
+			<div class="nav">
+			<if condition="$Think.session.uid neq ''">
+			        <a href="<{:U('User/edit')}>" title="用户中心">欢迎您，用户中心</a> /
+					<a href="<{:U('User/logout')}>" title="退出">退出</a>
+			<else/>
+			        <a href="javascript:void(0);" data-am-modal="{target: '#doc-modal-login'}" title="登录">登录</a> /
+					<a href="javascript:void(0);" data-am-modal="{target: '#doc-modal-register'}" title="注册">注册</a>
+			</if>
+					
+			</div>
+		</div>
+		<div id="nav">    
+			<ul>
+				<li id="tab_products" class="selected"><a href="index.php" title="">首页</a></li>
+				<li id="tab_order"><a href="index.php?m=Index&a=mlist">店内资讯</a></li>
+				<li id="tab_order"><a href="index.php?m=Index&a=map">门店地图</a></li>
+				<li id="tab_help"><a href="javascript:void(0);" data-am-modal="{target: '#doc-modal-1'}"  title="帮助中心">关注微信</a></li>
+			</ul>
+		</div>
+	</div>
+  <ol class="am-breadcrumb" style="margin:0">
+	  <li><a href="index.php">首页</a></li>
+	  <{$title}>
+  </ol>
+  <hr/>
+  </div>
+</div>

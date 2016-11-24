@@ -1,0 +1,50 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>徐记干果店</title>
+  <meta name="description" content="协同推广，门店管理">
+  <meta name="keywords" content="index">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+  <link rel="stylesheet" href="__TMPL__assets/css/amazeui.min.css"/>
+  <link rel="stylesheet" href="__TMPL__assets/css/app.css">
+</head>
+<body>
+<div style=" padding:150px 30px 30px 30px">
+<present name="message">
+<div class="am-panel am-panel-primary">
+  <div class="am-panel-hd">提示信息</div>
+  <div class="am-panel-bd">
+    <?php echo($message); ?>
+  </div>
+</div>
+<else/>
+<div class="am-panel am-panel-danger">
+  <div class="am-panel-hd">提示信息</div>
+  <div class="am-panel-bd">
+    <?php echo($error); ?>
+  </div>
+</div>
+</present>
+<p class="jump">
+页面自动 <a id="href" href="<?php echo($jumpUrl); ?>">跳转</a> 等待时间： <b id="wait"><?php echo($waitSecond); ?></b>
+</p>
+</div>
+<script type="text/javascript">
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time <= 0) {
+		location.href = href;
+		clearInterval(interval);
+	};
+}, 1000);
+})();
+</script>
+</body>
+</html>

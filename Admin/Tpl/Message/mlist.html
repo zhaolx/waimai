@@ -1,0 +1,57 @@
+<include file="Public:header" />
+<!-- content start -->
+  <div class="admin-content">
+
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">资讯列表</strong></div>
+    </div>
+	<div class="am-g">
+      <div class="am-u-md-6 am-cf">
+        <div class="am-fl am-cf">
+          <div class="am-btn-toolbar am-fl">
+            <div class="am-btn-group am-btn-group-xs">
+              <a type="button" class="am-btn am-btn-default"  href="<{:U('Message/add')}>"><span class="am-icon-plus"></span> 新增</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="am-g">
+      <div class="am-u-sm-12">
+        <form class="am-form">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                <th class="table-title">标题</th><th class="table-date">发布日期</th><th class="table-set">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+		    <foreach name="list" item="m">
+            <tr>
+              <td><a href="<{:U('Shop/message',array('shop_id'=>$m['uid'],'id'=>$m['id']))}>" target="_blank"><{$m.title}></a></td>
+              <td><{$m.time|date="y-m-d",###}></td>
+              <td>
+                <div class="am-btn-toolbar">
+                  <div class="am-btn-group am-btn-group-xs">
+                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="<{:U('Message/add',array('id'=>$m['id']))}>"><span class="am-icon-pencil-square-o"></span> 编辑</a>
+                    <a class="am-btn am-btn-default am-btn-xs am-text-danger" href="<{:U('Message/del',array('id'=>$m['id']))}>"><span class="am-icon-trash-o"></span> 删除</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+			</foreach>
+          </tbody>
+        </table>
+        <ul class="am-pagination blog-pagination" style="text-align: right;">
+      <{$page}>
+    </ul>
+          <hr />
+          <p>注：</p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <!-- content end -->
+</div>
+<include file="Public:footer" />

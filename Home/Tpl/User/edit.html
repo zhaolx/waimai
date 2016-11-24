@@ -1,0 +1,119 @@
+<include file="Public:header" />
+<!-- content start -->
+<div class="am-g">
+  <div class="am-u-lg-12 am-u-lg-centered">
+     <div class="admin-content">
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+	  <div class="am-panel am-panel-default">
+          <div class="am-panel-bd">
+		     <p>个人信息</p>
+             <form class="am-form am-form-horizontal" action="{:U('add')}" method="post" id="edform">
+          <div class="am-form-group">
+            <label class="am-u-sm-3 am-form-label">姓名</label>
+            <div class="am-u-sm-9">
+              <input type="text" class="" placeholder="" name="name" value="{$u.name}">
+            </div>
+          </div>
+          <div class="am-form-group">
+            <label class="am-u-sm-3 am-form-label">地址</label>
+            <div class="am-u-sm-9">
+              <input type="text" class="" placeholder="" name="address" value="{$u.address}">
+            </div>
+          </div>
+          <div class="am-form-group">
+            <div class="am-u-sm-9 am-u-sm-push-3">
+              <button type="button" class="am-btn am-btn-primary"  onclick="edcheck();">保存修改</button>
+            </div>
+          </div>
+        </form>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                <th class="table-title">金额</th><th class="table-title">下单日期</th><th class="table-set">备注</th><th class="table-set">状态</th><th class="table-set">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+		    <volist name="list" id="o" empty="暂无订单">
+            <tr>
+              <td>{$o.totalAmount}</a></td>
+			  <td>{$o.time|date="y-m-d",###}</td>
+			  <td>{$o.remarks}</td>
+              <td><if condition="$o.state eq 0"><a class="am-badge am-badge-danger am-radius">未确认</a><else/><span class="am-badge am-badge-success am-radius">已确认</span></if></a></td>             
+			  <td>
+                <div class="am-btn-toolbar">
+                  <div class="am-btn-group am-btn-group-xs">
+                    <a class="am-btn am-btn-default am-btn-xs am-text-secondary" href="javascript:void(0);" onClick="order({$o.order_no})"><span class="am-icon-eye"></span> 查看</a>
+					<if condition="$o.state eq 0">
+					<a class="am-btn am-btn-default am-btn-xs am-text-danger" href="index.php?m=User&a=delorder&order_no={$o.order_no}" onClick="if(confirm('删除订单,是否继续执行?')==false)return false;"><span class="am-icon-trash-o"></span> 删除</a>
+					</if> 
+                  </div>
+                </div>
+              </td>
+            </tr>
+			</volist>
+          </tbody>
+        </table>
+		{$page}
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+<!--订单详情-->
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-order">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd"><span id="no"></span>
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    <div class="am-modal-bd">
+      <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                <th class="table-title">名称</th><th class="table-title">价格</th><th class="table-title">数量</th>
+              </tr>
+          </thead>
+          <tbody id="order_good">
+          </tbody>
+        </table>
+		<span id="note"></span>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+function edcheck(){
+  if($("#edform :input[name=name]").val()==""){
+     alert("店名不能为空");
+	 return
+  }
+  if($("#edform :input[name=tid]").val()==""){
+     alert("类型不能为空");
+	 return
+  }
+  $("#edform").submit();
+
+}
+</script>	
+<script>
+function order(order_no){
+   $.get("{:U('getorder')}", { "order_no": order_no },
+	   function(data){
+        var str='';
+		for(var i=0;i<data.length;i++){
+			str+='<tr><td>'+data[i].name+'</td><td>'+data[i].price+'</a></td><td>'+data[i].num+'</td></tr>'; 
+		}	
+        $('#order_good').html(str);
+		$('#no').html("单号："+order_no);
+		$('#doc-modal-order').modal('open');
+   }, "json");	  
+}
+
+</script>
+<include file="Public:footer" />

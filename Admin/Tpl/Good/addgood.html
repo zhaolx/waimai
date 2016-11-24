@@ -1,0 +1,110 @@
+<include file="Public:header" />
+<link href="ueditor/themes/default/css/ueditor.css" rel="stylesheet" type="text/css">
+<script src="ueditor/ueditor.config.js" type="text/javascript"></script>
+<script src="ueditor/ueditor.all.min.js" type="text/javascript"></script>
+<!-- content start -->
+<div class="admin-content">
+
+  <div class="am-cf am-padding">
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">发布商品</strong></div>
+  </div>
+<form class="am-form" action="<{:U('addgood')}>" method="post" id="gform" enctype="multipart/form-data">
+	  <div class="am-g am-margin-top">
+		<div class="am-u-sm-2 am-text-right">
+		  商品名称
+		</div>
+		<div class="am-u-sm-4">
+		  <input type="text" class="am-input-sm" name="name" value="<{$g.name}>">
+		</div>
+		<div class="am-u-sm-6">*必填</div>
+	  </div>
+	  <div class="am-g am-margin-top">
+		<div class="am-u-sm-2 am-text-right">
+		  商品照片
+		</div>
+		<div class="am-u-sm-4">
+		  <input type="file" name="img" >
+		</div>
+		<div class="am-u-sm-6">*必填，380px*380px</div>
+	  </div>
+	  <div class="am-g am-margin-top">
+		<div class="am-u-sm-2 am-text-right">
+		  所属分类
+		</div>
+		<div class="am-u-sm-4">
+		  <select name="cid" id="cid">
+			<option value="">请选择分类</option>
+			<volist name="cate" id="c">
+			<option value="<{$c.cid}>" <eq name="c.cid" value="$g.cid">selected="selected"</eq> ><{$c.name}></option>
+			</volist>
+		  </select>
+		</div>
+		<div class="am-u-sm-6">*必填</div>
+	  </div>
+	  <div class="am-g am-margin-top">
+		<div class="am-u-sm-2 am-text-right">
+		  商品价格
+		</div>
+		<div class="am-u-sm-4">
+		  <input type="text" class="am-input-sm" name="price" value="<{$g.price}>">
+		</div>
+		<div class="am-u-sm-6">*必填</div>
+	  </div>
+	  <div class="am-g am-margin-top-sm">
+		<div class="am-u-sm-2 am-text-right">
+		  内容描述
+		</div>
+		<div class="am-u-sm-10">
+		  <textarea name="infor" id="myEditor1" rows="10" style="height:400px; width:100%"><{$g.infor}></textarea>
+		</div>
+	  </div>
+	  <div class="am-g am-margin-top">
+		<div class="am-u-sm-2 am-text-right">
+		  商品排序
+		</div>
+		<div class="am-u-sm-4">
+		  <input type="text" class="am-input-sm" name="g_order" value="<{$g.g_order}>">
+		</div>
+		<div class="am-u-sm-6">填写整数</div>
+	  </div>
+	  <div class="am-g am-margin-top">
+		<div class="am-u-sm-2 am-text-right">
+		  是否上架
+		</div>
+		<div class="am-u-sm-4">
+		  <label class="am-radio-inline">
+			<input type="radio"  value="1" name="state" <if condition="$g.state eq '1'">checked="checked"</if>> 上架
+		  </label>
+		  <label class="am-radio-inline">
+			<input type="radio" value="2" name="state" <if condition="$g.state eq '2'">checked="checked"</if>> 下架
+		  </label>
+		</div>
+		<div class="am-u-sm-6">下架后商品在前台不显示</div>
+	  </div>
+  <input type="hidden" name="gid" value="<{$g.gid}>" />
+  <input type="hidden" name="img" value="<{$g.img}>" />
+  <div class="am-form-group">
+	<div class="am-u-sm-9 am-u-sm-push-3">
+		<button type="button" class="am-btn am-btn-primary" onclick="gcheck();">确认发布</button>
+	</div>
+  </div>
+</form>
+</div>
+<script>
+var editor1 = new UE.ui.Editor();
+editor1.render('myEditor1');
+
+function gcheck(){
+  if($("#gform :input[name=name]").val()==""){
+     alert("名称不能为空");
+	 return
+  }
+  if($("#gform :input[name=content]").val()==""){
+     alert("内容不能为空");
+	 return
+  }
+  $("#gform").submit();
+
+}
+</script>	
+<include file="Public:footer" />
