@@ -28,7 +28,7 @@
 		  <volist name="goodlist" id="g" empty="暂无上架商品">
 		  <li>
 			<div class="am-gallery-item good_infor">
-			  <a href="<{:U('Index/good',array('gid'=>$c['gid']))}>">
+			  <a href="<{:U('Index/good',array('gid'=>$g['gid']))}>">
 				<div class="good_img"><img src="./Public/Uploads/Good/<{$g.img}>" alt="<{$g.name}>" id="img_<{$g.gid}>"/></div>
 				<h3 class="am-gallery-title"><{$g.name}></h3></a>
 				<div class="am-gallery-desc">¥<{$g.price}>

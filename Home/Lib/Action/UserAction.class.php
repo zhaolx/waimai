@@ -15,16 +15,16 @@ class UserAction extends Action
     public function login()
     {
         $User = M('User');
-        $u = $User->where('tel="' . $_POST['tel'] . '" and password="' . md5(md5($_POST['password'])) . '"')->find();
+        $u = $User->where('email="' . $_POST['email'] . '" and password="' . md5(md5($_POST['password'])) . '"')->find();
         if ($u['uid']) {
             session('uid', $u['uid']);
             if ($u['name']) {
-                $this->success('µÇÂ½³É¹¦', U('Index/index'));
+                $this->success('ç™»é™†æˆåŠŸ', U('Index/index'));
             } else {
-                $this->success('µÇÂ½³É¹¦', U('Index/index'));
+                $this->success('ç™»é™†æˆåŠŸ', U('Index/index'));
             }
         } else {
-            $this->error('µÇÂ½Ê§°Ü');
+            $this->error('ç™»é™†å¤±è´¥');
         }
     }
     public function register()
@@ -32,15 +32,15 @@ class UserAction extends Action
         $User = M('User');
         $_POST['regtime'] = time();
         $_POST['password'] = md5(md5($_POST['password']));
-        if ($User->where('tel="' . $_POST['tel'] . '"')->getField('uid')) {
-            $this->error('¸ÃÊÖ»úºÅÒÑ¾­±»×¢²á£¡');
+        if ($User->where('email="' . $_POST['email'] . '"')->getField('uid')) {
+            $this->error('è¯¥é‚®ç®±å·²ç»è¢«æ³¨å†Œï¼');
         } else {
             if ($User->add($_POST)) {
                 $uid = $User->where('tel="' . $_POST['tel'] . '" and password="' . $_POST['password'] . '"')->getField('uid');
                 session('uid', $uid);
-                $this->success('×¢²á³É¹¦£¡', U('Index/index'));
+                $this->success('æ³¨å†ŒæˆåŠŸï¼', U('Index/index'));
             } else {
-                $this->error('×¢²áÊ§°Ü£¡');
+                $this->error('æ³¨å†Œå¤±è´¥ï¼');
             }
         }
     }
@@ -54,13 +54,13 @@ class UserAction extends Action
         import('ORG.Util.Page');
         $count = $Order->where('uid=' . session('uid'))->count();
         $Page = new Page($count, 10);
-        $Page->setConfig('header', '¸ö¶©µ¥');
+        $Page->setConfig('header', 'ä¸ªè®¢å•');
         $show = $Page->show();
         $list = $Order->where('uid=' . session('uid'))->order('time desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         $this->assign('list', $list);
         $this->assign('page', $show);
-        $this->assign('catename', "ÓÃ»§ÖÐÐÄ");
-        $title = "<li><a href='".U('User/edit')."'>ÓÃ»§ÖÐÐÄ</a></li>";
+        $this->assign('catename', "ç”¨æˆ·ä¸­å¿ƒ");
+        $title = "<li><a href='".U('User/edit')."'>ç”¨æˆ·ä¸­å¿ƒ</a></li>";
         $this->assign('title', $title);
         $this->display();
     }
@@ -76,27 +76,41 @@ class UserAction extends Action
         $Ordergood = M('Ordergood');
         if ($Ordergood->where('order_no=' . $_GET['order_no'])->delete()) {
             if ($Order->where('order_no=' . $_GET['order_no'])->delete()) {
-                $this->success('É¾³ý³É¹¦');
+                $this->success('åˆ é™¤æˆåŠŸ');
             } else {
-                $this->error('É¾³ýÊ§°Ü');
+                $this->error('åˆ é™¤å¤±è´¥');
             }
         } else {
-            $this->error('É¾³ýÊ§°Ü');
+            $this->error('åˆ é™¤å¤±è´¥');
         }
     }
     public function add()
     {
         $User = M('User');
         if ($User->where('uid=' . session('uid'))->save($_POST)) {
-            $this->success('±à¼­³É¹¦');
+            $this->success('ç¼–è¾‘æˆåŠŸ');
         } else {
-            $this->error('±à¼­Ê§°Ü');
+            $this->error('ç¼–è¾‘å¤±è´¥');
         }
     }
     public function logout()
     {
         session(null);
-        $this->success('ÍË³ö³É¹¦£¡', U('Index/index'));
+        $this->success('é€€å‡ºæˆåŠŸï¼', U('Index/index'));
+    }
+	public function checkemail()
+    {
+		$email = I('email');
+        if(!$email){
+			$this->error('ç¼ºå°‘å‚æ•°');
+		}else{
+			if(M('User')->where('email="' . $email . '"')->getField('uid')){
+				$this->error('è¯¥é‚®ç®±å·²ç»è¢«æ³¨å†Œï¼');
+			}else{
+				$this->success(1);
+			}
+		}
+        
     }
     protected function is_login()
     {
@@ -106,3 +120,4 @@ class UserAction extends Action
         }
     }
 }
+?>

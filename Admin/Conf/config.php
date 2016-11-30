@@ -1,4 +1,4 @@
 <?php
-$array = require ROOT."/config.php";
+$array = require ROOT."/conf/config.php";
 return $array ;
 ?>

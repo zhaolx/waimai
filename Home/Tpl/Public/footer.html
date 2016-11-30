@@ -8,7 +8,7 @@
 id="">
   <ul class="am-navbar-nav am-cf am-avg-sm-4">
     <li>
-      <a href="<{:U('Index')}>">
+      <a href="<{:U('Index/index')}>">
         <img src="__TMPL__assets/i/icon/087.png"/>
         <span class="am-navbar-label">首页</span>
       </a>
@@ -63,10 +63,10 @@ id="">
 		  <fieldset>
 			<legend>会员登陆</legend>
 			<div class="am-form-group">
-			  <input type="text" class="" placeholder="输入注册手机号" name="tel">
+			  <input type="text" class="" placeholder="输入邮箱" name="email">
 			</div>
 			<div class="am-form-group">
-			  <input type="password" class="" placeholder="请输入注册密码" name="password">
+			  <input type="password" class="" placeholder="请输入密码" name="password">
 			</div>
 			<p><button type="button" class="am-btn am-btn-success am-btn-block" onclick="locheck();">登陆</button></p>
 		  </fieldset>
@@ -86,21 +86,19 @@ id="">
 		  <fieldset>
 			<legend>新用户注册</legend>
 			<div class="am-form-group">
-			  <input type="text" class="" placeholder="输入注册手机号" name="tel">
+			  <input type="text" class="" placeholder="请输入注册邮箱" name="email">
 			</div>
 			<div class="am-form-group">
-			  <input type="password" class="" placeholder="请输入注册密码" name="password">
+			  <input type="password" class="" placeholder="请输入密码" name="password">
 			</div>
 			<div class="am-form-group">
-			  <input type="password" class="" placeholder="请重复输入注册密码" name="repassword">
+			  <input type="password" class="" placeholder="请重复输入密码" name="repassword">
 			</div>
 			<div class="am-form-group">
-			  <input type="text" class="" placeholder="输入收货人姓名" name="name">
+			  <input type="text" class="" placeholder="输入您的手机号" name="tel">
 			</div>
-			<div class="am-form-group">
-			  <input type="text" class="" placeholder="输入收货地址" name="address">
-			</div>
-			<p><button type="button" class="am-btn am-btn-success am-btn-block" onclick="recheck();">注册一个账号</button></p>
+			
+			<p><button type="button" class="am-btn am-btn-success am-btn-block" onclick="recheck();">提交</button></p>
 		  </fieldset>
 	  </form>
     </div>
@@ -152,10 +150,10 @@ id="">
 </div>
 <script>
 function login(){
-  if('{$Think.session.uid}'){
+  if('<{$Think.session.uid}>'){
   
   //如果存在session，直接进入后台
-  window.location.href="{:U('User/edit')}"; 
+  window.location.href="<{:U('User/edit')}>"; 
   }else{
   //弹出窗体，选择登陆还是注册
   
@@ -164,64 +162,110 @@ function login(){
 }
 
 function recheck(){
-  if($("#reform :input[name=tel]").val()==""){
-     alert("手机号不能为空");
-	 return
+  $email = $("#reform :input[name=email]");
+  $mobile = $("#reform :input[name=tel]");
+  $password = $("#reform :input[name=password]");
+  $confirm_password = $("#reform :input[name=repassword]");
+  var submit = false;
+  if($email.val()==""){
+	 layer.msg("邮箱不能为空");
+	 $email.css('border','1px solid #f70b03');
+	 return false;
   }
-  if($("#reform :input[name=password]").val()==""){
-     alert("密码不能为空");
-	 return
+   var email_reg =/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/; 
+   if(!email_reg.test($email.val())){ 
+      layer.msg("您输入的邮箱有误");
+	  $email.css('border','1px solid #f70b03');
+	  return false;  
+   }
+	//还原
+  $email.css('border','1px solid #ccc');
+  
+  if($password.val()==""){
+	 layer.msg("密码不能为空");
+	 $password.css('border','1px solid #f70b03');
+	 return false;
   }
-  if($("#reform :input[name=password]").val()!=$("#reform :input[name=repassword]").val()){
-     alert("两次密码不一致");
-	 return
+  if($password.val().length < 6){
+	 layer.msg("密码不能少于6个字符");
+	 $password.css('border','1px solid #f70b03');
+	 return false;
   }
-  if($("#reform :input[name=name]").val()==""){
-     alert("收货人不能为空");
-	 return
+  $password.css('border','1px solid #ccc');
+  
+  if($password.val()!=$confirm_password.val()){
+	 layer.msg("两次密码不一致");
+	 $confirm_password.css('border','1px solid #f70b03');
+	 return false;
   }
-  if($("#reform :input[name=address]").val()==""){
-     alert("收货地址不能为空");
-	 return
+  $confirm_password.css('border','1px solid #ccc');
+  
+  if($mobile.val()==""){
+	 layer.msg("手机号不能为空");
+	 $mobile.css('border','1px solid #f70b03');
+	 return false;
   }
-  $("#reform").submit();
+  var mobilereg = /^(((1[3-8]{1}))+\d{9})$/; 
+  if(!mobilereg.test($mobile.val())){ 
+	  layer.msg("您输入的手机号有误");
+	  $mobile.css('border','1px solid #f70b03');
+	  return false;
+   }
+  $mobile.css('border','1px solid #ccc');
+  $.post('<{:U("User/checkemail")}>',{email:$email.val()},function(data){
+		if(data.status == 1){
+			submit = true;
+			console.log('1111');
+			$("#reform").submit();
+		}else{
+			$email.css('border','1px solid #f70b03');
+			layer.msg(data.info);
+		}
+  });
+
+ // return false;
+  
 
 }
 function locheck(){
-  if($("#loform :input[name=tel]").val()==""){
-     alert("手机号不能为空");
+  if($("#loform :input[name=email]").val()==""){
+	 $("#loform :input[name=email]").css('border','1px solid #f70b03');
+	 layer.msg("邮箱不能为空");
 	 return
   }
+  $("#loform :input[name=email]").css('border','1px solid #ccc');
   if($("#loform :input[name=password]").val()==""){
-     alert("密码不能为空");
+	 $("#loform :input[name=password]").css('border','1px solid #f70b03');
+     layer.msg("密码不能为空");
 	 return
   }
+  $("#loform :input[name=password]").css('border','1px solid #ccc');
   $("#loform").submit();
 
 }
 function ocheck(){
   if($("#oform :input[name=tel]").val()==""){
-     alert("手机号不能为空");
+     layer.msg("手机号不能为空");
 	 return
   }
   if($("#oform :input[name=name]").val()==""){
-     alert("收货人不能为空");
+     layer.msg("收货人不能为空");
 	 return
   }
   if($("#oform :input[name=address]").val()==""){
-     alert("收货地址不能为空");
+     layer.msg("收货地址不能为空");
 	 return
   }
     var ShoppingCart = utils.getParam("ShoppingCart");
 	if(ShoppingCart==null||ShoppingCart==""){
-	    alert("没有商品，请先去购物吧！");
+	    layer.msg("没有商品，请先去购物吧！");
 	    return
 	}else{
 		var jsonstr = JSON.parse(ShoppingCart.substr(1,ShoppingCart.length));
 		var productlist = jsonstr.productlist;
 		orderdetail.totalAmount = jsonstr.totalAmount;	
 		if(orderdetail.totalAmount.toFixed(2)<=0){
-			alert("没有商品，请先去购物吧！");
+			layer.msg("没有商品，请先去购物吧！");
 	        return
 		}else{
 			var order_no = new Date().getTime();  
@@ -233,7 +277,7 @@ function ocheck(){
 				$.post("<{:U('ordergood')}>", { gid: productlist[i].id, num: productlist[i].num ,name:productlist[i].name,price:productlist[i].price,order_no:order_no},function(data)                    {
                     n = n+1;
 					if(n==productlist.length){
-					    alert('开始提交');
+					    //layer.msg('开始提交');
 				    	utils.setParam("ShoppingCart","");
 			            car_load();
 		            	$("#oform").submit();	
@@ -279,15 +323,15 @@ $("#delcart").click(function(){
 //商品详情界面将商品放入购物车
 function putCart(){
 	var product={
-			id:'{$good.gid}',    // 商品的ID
-			name: '{$good.name}',    // 商品名称
+			id:'<{$good.gid}>',    // 商品的ID
+			name: '<{$good.name}>',    // 商品名称
 			num:$('.buycount').html(),              // 数量
-			price:'{$good.price}',    // 价格
+			price:'<{$good.price}>',    // 价格
 		};
-	var thisTop = $("#img_{$good.gid}").offset().top; //所在位置的高度
-	var thisLeft = $("#img_{$good.gid}").offset().left; //所在位置的宽度
+	var thisTop = $("#img_<{$good.gid}>").offset().top; //所在位置的高度
+	var thisLeft = $("#img_<{$good.gid}>").offset().left; //所在位置的宽度
 	
-	animatenTop(thisTop,thisLeft,'{$good.gid}',product);
+	animatenTop(thisTop,thisLeft,'<{$good.gid}>',product);
 
 }
 

@@ -36,6 +36,14 @@ class IndexAction extends Action
         $slide = $Slide->order('s_order desc')->select();
         $this->assign('slide', $slide);
         $this->assign('catename', $catename);
+		vendor('PHPSdkMaster.geetestlib');
+		$GtSdk = new GeetestLib(C('captcha_id'), C('private_key'));
+		
+		$status = $GtSdk->pre_process('test');
+		//var_dump($status);die;
+		session('gtserver',$status);
+		session('user_id',$user_id);
+		$this->assign('captcha', $GtSdk->get_response_str());
         $this->display();
     }
     public function good()

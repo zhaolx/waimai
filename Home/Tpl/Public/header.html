@@ -27,6 +27,7 @@
 	<script src="__TMPL__assets/js/amazeui.min.js"></script>
 	<!--<![endif]-->
 	<script src="__TMPL__assets/js/cart.js"></script>
+	<script src="__PUBLIC__/layer/layer.js"></script>
 	<link rel="stylesheet" href="__TMPL__assets/css/app.css"/>
 </head>
 <body style="padding-bottom:0px;">
@@ -41,7 +42,7 @@
   </h1>
   <in name="Think.ACTION_NAME"  value="edit">
   <div class="am-header-right am-header-nav">
-    <a href="index.php?m=User&a=logout" class="" >
+    <a href="<{:U('User/logout')}>" class="" >
       退出
     </a>
   </div>
@@ -56,7 +57,7 @@
   <div class="am-offcanvas">
     <div class="am-offcanvas-bar am-offcanvas-bar-flip">
       <ul class="am-menu-nav am-avg-sm-3">
-	      <li><a href="index.php">全部</a></li>
+	      <li><a href="<{:U('Index/index')}>">全部</a></li>
 		  <volist name="cate" id="c">
 		  <li><a href="<{:U('Index/index',array('cid'=>$c['cid']))}>"><{$c.name}></a></li>
 		  </volist>
@@ -83,15 +84,15 @@
 		</div>
 		<div id="nav">    
 			<ul>
-				<li id="tab_products" class="selected"><a href="index.php" title="">首页</a></li>
-				<li id="tab_order"><a href="index.php?m=Index&a=mlist">店内资讯</a></li>
-				<li id="tab_order"><a href="index.php?m=Index&a=map">门店地图</a></li>
+				<li id="tab_products" class="selected"><a href="<{:U('Index/index')}>" title="">首页</a></li>
+				<li id="tab_order"><a href="<{:U('Index/mlist')}>">店内资讯</a></li>
+				<li id="tab_order"><a href="<{:U('Index/map')}>">门店地图</a></li>
 				<li id="tab_help"><a href="javascript:void(0);" data-am-modal="{target: '#doc-modal-1'}"  title="帮助中心">关注微信</a></li>
 			</ul>
 		</div>
 	</div>
   <ol class="am-breadcrumb" style="margin:0">
-	  <li><a href="index.php">首页</a></li>
+	  <li><a href="<{:U('Index/index')}>">首页</a></li>
 	  <{$title}>
   </ol>
   <hr/>

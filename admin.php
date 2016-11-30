@@ -1,5 +1,5 @@
 <?php
-define('ROOT','./');//定义底层路径
+define('ROOT','./');//定义网站根目录
 define('THINK_PATH','ThinkPHP/');//定义底层路径
 define('APP_NAME','Admin');//定义后台
 define('APP_PATH','Admin/');//定义前台位置

@@ -12,19 +12,24 @@
   <meta name="apple-mobile-web-app-title" content="Amaze UI" />
   <link rel="stylesheet" href="__TMPL__assets/css/amazeui.min.css"/>
   <link rel="stylesheet" href="__TMPL__assets/css/app.css">
+  <style>
+	.am-panel-hd{text-align:center;line-height:35px;height:50px;padding-bottom:15px;}
+	.am-panel-bd{text-align:center;line-height:50px;}
+	.jump{text-align:center;}
+  </style>
 </head>
 <body>
 <div style=" padding:150px 30px 30px 30px">
 <present name="message">
 <div class="am-panel am-panel-primary">
-  <div class="am-panel-hd">提示信息</div>
+  <div class="am-panel-hd"><b>提示信息</b></div>
   <div class="am-panel-bd">
     <?php echo($message); ?>
   </div>
 </div>
 <else/>
 <div class="am-panel am-panel-danger">
-  <div class="am-panel-hd">提示信息</div>
+  <div class="am-panel-hd"><b>提示信息</b></div>
   <div class="am-panel-bd">
     <?php echo($error); ?>
   </div>

@@ -1,4 +1,4 @@
 <?php
-$array = require $_SERVER['DOCUMENT_ROOT']."/weixin/config.php";
+$array = require ROOT."/conf/config.php";
 return $array ;
 ?>
